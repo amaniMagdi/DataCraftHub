@@ -1,0 +1,4 @@
+# .gitignore
+
+# Database
+*.sqlite3

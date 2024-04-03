@@ -40,12 +40,20 @@ class ServiceRequest(models.Model):
     @property
     def lbr_rate(self):
         #get lbr_rate from Techs table based on techs field
-        pass
+        try:
+            tech = Techs.objects.get(techs=self.techs)
+            return tech.lbr_rate
+        except Techs.DoesNotExist:
+            return None
 
     @property
     def work_day(self):
         #get working day based on work_date
-        pass
+        work_date = self.work_date
+        if not work_date:
+            return None
+        days_of_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        return days_of_week[work_date.weekday()]
     
 
 
